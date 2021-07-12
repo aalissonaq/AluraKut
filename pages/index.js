@@ -31,8 +31,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>AluraKut - Imersão React 3ªedição | aalissonaq </title>
         <meta charSet="utf-8" />
+        <title>AluraKut - Imersão React 3ªedição | aalissonaq </title>
         <link rel="icon" href="https://alurakut.vercel.app/logo.svg"></link>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
