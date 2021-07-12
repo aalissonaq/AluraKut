@@ -1,3 +1,5 @@
+import Head from 'next/head'
+
 import MainGrid from '../src/components/MainGrid'
 import Box from '../src/components/Box'
 import { AlurakutMenu, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons';
@@ -28,6 +30,13 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <title>AluraKut - Imersão React 3ªedição | aalissonaq </title>
+        <meta charSet="utf-8" />
+        <link rel="icon" href="https://alurakut.vercel.app/logo.svg"></link>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+
       <AlurakutMenu />
       <MainGrid>
         {/* <Box style="grid-area: profileArea;"> */}
