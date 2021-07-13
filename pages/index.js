@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 import Head from 'next/head'
 
 import MainGrid from '../src/components/MainGrid'
@@ -8,11 +10,11 @@ import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelations';
 function ProfileSidebar(propriedades) {
   console.log(propriedades);
   return (
-    <Box>
+    <Box as="aside">
       <img src={`https://github.com/${propriedades.githubUser}.png`} style={{ borderRadius: '8px' }} />
       <hr />
       <p>
-        <a class="boxLink" href={`https://github.com/${propriedades.githubUser}`}>
+        <a className="boxLink" href={`https://github.com/${propriedades.githubUser}`}>
           @{propriedades.githubUser.toUpperCase()}
         </a>
       </p>
@@ -36,6 +38,18 @@ export default function Home() {
     'luizomf'
   ]
 
+  const [community, setCommunity] = useState([
+    {
+      id: '1234567890',
+      title: 'Eu odeio Acondar Cedo!',
+      image: 'https://alurakut.vercel.app/capa-comunidade-01.jpg',
+    },
+    {
+      id: '98765421',
+      title: 'Cariri Inovação',
+      image: 'https://caririinovacao.com.br/wp-content/uploads/2021/05/Logo_Vertical_Dark2-768x768.png',
+    }
+  ]);
   return (
     <>
       <Head>
@@ -45,7 +59,7 @@ export default function Home() {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
-      <AlurakutMenu />
+      <AlurakutMenu githubUser={usuarioAleatorio} />
       <MainGrid>
         {/* <Box style="grid-area: profileArea;"> */}
         <div className="profileArea" style={{ gridArea: 'profileArea' }}>
@@ -61,7 +75,21 @@ export default function Home() {
           </Box>
           <Box>
             <h2 className="subTitle">O que você deseja fazer?</h2>
-            <form className="">
+            <form className=""
+              onSubmit={function handleCreateCommunity(e) {
+                e.preventDefault();
+                const dataForm = new FormData(e.target);
+
+                const newCommunity = {
+                  id: new Date().toISOString,
+                  title: dataForm.get('title'),
+                  image: dataForm.get('image')
+                }
+                const communityUpdate = [...community, newCommunity];
+                setCommunity(communityUpdate);
+                dataForm.set('title') = ''
+
+              }}>
               <div>
                 <input
                   placeholder="Qual vai ser o nome da sua comunidade?"
@@ -97,8 +125,8 @@ export default function Home() {
             <ul>
               {pessoasFavoritas.map((itemAtual) => {
                 return (
-                  <li>
-                    <a href={`/users/${itemAtual}`} key={itemAtual}>
+                  <li key={itemAtual}>
+                    <a href={`/users/${itemAtual}`} >
                       <img src={`https://github.com/${itemAtual}.png`} />
                       <span>{itemAtual}</span>
                     </a>
@@ -107,12 +135,24 @@ export default function Home() {
               })}
             </ul>
           </ProfileRelationsBoxWrapper>
-
-          <Box>
+          {/*Comunidades*/}
+          <ProfileRelationsBoxWrapper>
             <h2 className="smallTitle">
-              Comunidade Legais
+              Comunidade ({community.length})
             </h2>
-          </Box>
+            <ul>
+              {community.map((itemAtual) => {
+                return (
+                  <li key={itemAtual.id}>
+                    <a href={`/users/${itemAtual.title}`}>
+                      <img src={itemAtual.image} alt={itemAtual.title} />
+                      <span>{itemAtual.title}</span>
+                    </a>
+                  </li>
+                )
+              })}
+            </ul>
+          </ProfileRelationsBoxWrapper>
         </div>
       </MainGrid>
     </>
