@@ -75,7 +75,7 @@ export default function Home() {
           </Box>
           <Box>
             <h2 className="subTitle">O que você deseja fazer?</h2>
-            <form className=""
+            <form
               onSubmit={function handleCreateCommunity(e) {
                 e.preventDefault();
                 const dataForm = new FormData(e.target);
@@ -87,7 +87,7 @@ export default function Home() {
                 }
                 const communityUpdate = [...community, newCommunity];
                 setCommunity(communityUpdate);
-                dataForm.set('title') = ''
+
 
               }}>
               <div>
