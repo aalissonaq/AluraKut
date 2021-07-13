@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 import MainGrid from '../src/components/MainGrid'
 import Box from '../src/components/Box'
-import { AlurakutMenu, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons';
+import { AlurakutMenu, AlurakutProfileSidebarMenuDefault, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons';
 import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelations';
 
 function ProfileSidebar(propriedades) {
@@ -10,6 +10,14 @@ function ProfileSidebar(propriedades) {
   return (
     <Box>
       <img src={`https://github.com/${propriedades.githubUser}.png`} style={{ borderRadius: '8px' }} />
+      <hr />
+      <p>
+        <a class="boxLink" href={`https://github.com/${propriedades.githubUser}`}>
+          @{propriedades.githubUser.toUpperCase()}
+        </a>
+      </p>
+      <br />
+      <AlurakutProfileSidebarMenuDefault />
     </Box>
   )
 }
@@ -51,6 +59,34 @@ export default function Home() {
 
             <OrkutNostalgicIconSet fas={1} confiavel={3} legal={3} sexy={1} />
           </Box>
+          <Box>
+            <h2 className="subTitle">O que você deseja fazer?</h2>
+            <form className="">
+              <div>
+                <input
+                  placeholder="Qual vai ser o nome da sua comunidade?"
+                  name="title"
+                  aria-label="Qual vai ser o nome da sua comunidade?"
+                  style={{ borderRadius: '8px' }}
+                  type="text"
+                />
+              </div>
+              <div>
+                <input
+                  placeholder="Coloque uma URL para usarmos de capa"
+                  name="image"
+                  aria-label="Coloque uma URL para usarmos de capa"
+                  type=""
+                  style={{ borderRadius: '8px' }}
+                />
+              </div>
+              <button
+                style={{ borderRadius: '8px' }}
+              >
+                Criar comunidade
+              </button>
+            </form>
+          </Box>
         </div>
         <div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
           <ProfileRelationsBoxWrapper>
@@ -71,6 +107,12 @@ export default function Home() {
               })}
             </ul>
           </ProfileRelationsBoxWrapper>
+
+          <Box>
+            <h2 className="smallTitle">
+              Comunidade Legais
+            </h2>
+          </Box>
         </div>
       </MainGrid>
     </>
