@@ -79,15 +79,18 @@ export default function Home() {
               onSubmit={function handleCreateCommunity(e) {
                 e.preventDefault();
                 const dataForm = new FormData(e.target);
-
-                const newCommunity = {
-                  id: new Date().toISOString,
-                  title: dataForm.get('title'),
-                  image: dataForm.get('image')
+                if (dataForm.get('title') === '' || dataForm.get('image') === '') {
+                  alert('Por favor preencha dos campos');
+                } else {
+                  const newCommunity = {
+                    id: new Date().toISOString,
+                    title: dataForm.get('title'),
+                    image: dataForm.get('image')
+                  }
+                  const communityUpdate = [...community, newCommunity];
+                  setCommunity(communityUpdate);
+                  document.getElementById('formCommunity').reset();
                 }
-                const communityUpdate = [...community, newCommunity];
-                setCommunity(communityUpdate);
-                document.getElementById('formCommunity').reset();
 
               }}>
               <div>
