@@ -80,7 +80,7 @@ export default function Home() {
                 e.preventDefault();
                 const dataForm = new FormData(e.target);
                 if (dataForm.get('title') === '' || dataForm.get('image') === '') {
-                  alert('Por favor preencha dos campos');
+                  alert('Por favor preencha dos campos Nome da Comunidade e URL da Capa');
                 } else {
                   const newCommunity = {
                     id: new Date().toISOString,
@@ -129,7 +129,7 @@ export default function Home() {
               {pessoasFavoritas.map((itemAtual) => {
                 return (
                   <li key={itemAtual}>
-                    <a href={`/users/${itemAtual}`} >
+                    <a href={`https://github.com/${itemAtual}`} target="_blank" >
                       <img src={`https://github.com/${itemAtual}.png`} />
                       <span>{itemAtual}</span>
                     </a>
